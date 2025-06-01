@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>मंडी मित्र - Registration</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <h1 class="logo">मंडी मित्र</h1>
+            <ul class="nav-links">
+               
+            </ul>
+        </nav>
+    </header>
+
+    <div class="registration-container">
+        <h2>Register as a New User</h2>
+        <form action="register.php" method="POST" id="registrationForm">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+            
+            <label for="phone">Phone Number</label>
+            <input type="text" id="phone" name="phone" placeholder="Enter your phone number" required>
+            
+            <label for="village">Village</label>
+            <input type="text" id="village" name="village" placeholder="Enter your village name" required>
+            
+            <label for="district">District</label>
+            <input type="text" id="district" name="district" placeholder="Enter your district" required>
+            
+            <label for="state">State</label>
+            <input type="text" id="state" name="state" placeholder="Enter your state" required>
+            
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            
+            <button type="submit" class="register-btn">Register</button>
+        </form>
+
+        <div class="additional-links">
+            <button class="login-btn" onclick="window.location.href='login1.html'">Already have an account? Login</button>
+            <button class="home-btn" onclick="window.location.href='http://localhost/02/index.html'">Go to Home</button>
+        </div>
+    </div>
+
+    <script>
+        // Check if the URL contains a success message
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('success')) {
+            alert('Registration successful!');
+            // Clear the form fields
+            document.getElementById('registrationForm').reset();
+        } else if (urlParams.has('error')) {
+            alert('Username is  already exists. Please try again.');
+        }
+    </script>
+</body>
+</html>

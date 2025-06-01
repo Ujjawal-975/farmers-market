@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>मंडी मित्र - Login</title>
+    <link rel="stylesheet" href="styles1.css">
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Header/Navbar */
+        header {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            color: white;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Login Form Container */
+        .login-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #28a745;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            text-align: left;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        input:focus {
+            border-color: #28a745;
+            outline: none;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .login-btn {
+            background-color: #28a745;
+            margin-bottom: 15px;
+        }
+
+        .additional-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .additional-links button {
+            background: none;
+            border: none;
+            color: #007bff;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .additional-links button:hover {
+            color: #0056b3;
+        }
+
+        /* Captcha Section */
+        .captcha-container {
+            margin-bottom: 15px;
+        }
+
+        .captcha-container label {
+            display: inline-block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .captcha-container input {
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 600px) {
+            .additional-links {
+                flex-direction: column;
+            }
+
+            .login-container {
+                width: 90%;
+            }
+
+            .additional-links button {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body onload="generateCaptcha()">
+<header>
+    <nav class="navbar">
+        <h1 class="logo">मंडी मित्र</h1>
+    </nav>
+</header>
+
+<!-- Login Form -->
+<div class="login-container">
+    <h2>Login As Buyer</h2>
+  <form action="login_buyer.php" method="POST" onsubmit="return validateCaptcha()">
+
+        <label for="username">User Name</label>
+        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+        
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        
+        <!-- Captcha Section -->
+        <div class="captcha-container">
+            <label for="captcha">Captcha: Solve this: 
+                <span id="captchaExpression"></span>
+            </label>
+            <input type="number" id="captchaInput" name="captcha" placeholder="Enter the result" required>
+        </div>
+        
+        <button type="submit" class="login-btn">Login</button>
+    </form>
+
+    <div class="additional-links">
+        <button class="register-btn" onclick="window.location.href='registration.html'">Create account</button>
+        <button class="home-btn" onclick="window.location.href='http://localhost/02/index.html'">Go to Home</button>
+    </div>
+</div>
+
+<script>
+    let captchaAnswer;
+
+    function generateCaptcha() {
+        // Generate two random numbers between 1 and 10
+        const num1 = Math.floor(Math.random() * 10) + 1;
+        const num2 = Math.floor(Math.random() * 10) + 1;
+        
+        // Display the captcha expression
+        document.getElementById("captchaExpression").innerText = `${num1} + ${num2} = ?`;
+
+        // Store the correct answer
+        captchaAnswer = num1 + num2;
+    }
+
+    function validateCaptcha() {
+        const userAnswer = parseInt(document.getElementById("captchaInput").value, 10);
+
+        if (userAnswer === captchaAnswer) {
+            return true;  // Captcha is correct, form can be submitted
+        } else {
+            alert("Incorrect captcha. Please try again.");
+            generateCaptcha();  // Generate a new captcha if incorrect
+            return false;  // Prevent form submission
+        }
+    }
+</script>
+
+</body>
+</html>

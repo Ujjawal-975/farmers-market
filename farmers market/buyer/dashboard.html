@@ -1,0 +1,136 @@
+<?php
+session_start();
+include 'db_connection.php'; // Include your database connection
+
+// Check if the user is logged in
+if (!isset($_SESSION['username'])) {
+    header('Location: login.php'); // Redirect to login page if not logged in
+    exit();
+}
+
+// Get the logged-in username
+$username = $_SESSION['username']; // Make sure this is set during login
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buyer Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Top Navigation Bar */
+        .navbar {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000; /* Make sure the navbar is on top */
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding-left: 15px; /* Added left padding for better alignment */
+            float: left; /* Align to the left */
+        }
+
+        /* Left Side Navigation */
+        .sidebar {
+            width: 250px;
+            background-color: #3f4441;
+            color: white;
+            padding-top: 60px; /* Adjust for the navbar height */
+            position: fixed;
+            height: 100%;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            padding: 15px;
+            text-align: left;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #444;
+            padding-left: 15px;
+        }
+
+        /* Right Side Content */
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 60px; /* Add margin for the fixed navbar */
+        }
+
+        .content h1 {
+            color: #28a745;
+            font-size: 2.5rem;
+        }
+
+        .content img {
+            width: 150px;
+            height: 150px;
+        }
+        
+        .content span {
+            display: block;
+            font-size: 1.5rem;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation Bar -->
+    <div class="navbar">
+        <span class="logo">मंडी मित्र</span>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+       <ul>
+		<li><a href="products.php" target="_blank">Buy Crops</a></li>
+       
+    
+	<li><a href="cart.php">Your Cart</a></li>
+
+    <li><a href="http://localhost/02/index.html">Logout</a></li>
+</ul>
+
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h1>Welcome, <?php echo htmlspecialchars($username); ?>! 👋</h1>
+        <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" alt="Handshake GIF"> <!-- Handshake GIF -->
+        <span>Welcome to your dashboard!</span>
+    </div>
+
+</body>
+</html>

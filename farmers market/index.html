@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>मंडी मित्र</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-image: url('01.webp'); /* Correctly set the background image */
+            background-size: cover; /* Make the background cover the entire page */
+            background-position: center; /* Center the background image */
+            color: white; /* Set text color to white for better contrast */
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Navigation Bar -->
+    <header>
+        <nav class="navbar" id="navbar"> <!-- Added ID for navbar -->
+            <h1 class="logo">मंडी मित्र</h1>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="farmar/login1.html">Login as Farmer</a></li> <!-- Use relative path -->
+                <li><a href="buyer/login.html">Login as Buyer</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content with Background Image -->
+    <main>
+        <section id="hero">
+            <div class="frame">
+                <h2>Welcome to मंडी मित्र</h2>
+                <p>Buy Fresh Produce Direct from Farmers or Sell Your Crops Without Intermediaries</p>
+            </div> <!-- Close div.frame -->
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 मंडी मित्र. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript for Changing Navbar Color on Scroll -->
+    <script>
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 1) {
+                navbar.style.background = 'rgba(0, 0, 0, 0.5)';  // Dimmer color on scroll
+            } else {
+                navbar.style.background = 'rgba(0, 0, 0, 0.7)';  // Original color at the top
+            }
+        });
+    </script>
+</body>
+</html>
